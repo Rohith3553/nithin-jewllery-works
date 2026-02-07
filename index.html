@@ -3,49 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nithin Jewellery Works | Rasievava</title>
+    <title>NJ Designs | Nithin Jewellery Works</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
-        <nav>
-            <div class="logo">NJW</div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Collections</a></li>
-                <li><a href="#">Our Ideas</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="logo">NJ</div>
+        <div class="header-text">
+            <h1>Nithin Jewellery Works</h1>
+            <p>Near Shrike Busstop | 9866483839</p>
+        </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="brand-name">RASIEVAVA</h1>
-            <h2 class="sub-brand">Nithin Jewellery Works</h2>
-            <p class="tagline">"Crafting Your Dreams into Golden Reality"</p>
-            <div class="divider"></div>
-            <p class="description">మా దగ్గర వినూత్నమైన ఆలోచనలు (Unique Thoughts) మరియు స్టైలిష్ డిజైన్స్ కలయికతో నగలు తయారు చేయబడతాయి.</p>
-            <a href="#" class="btn">Explore Collections</a>
-        </div>
-    </section>
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterSelection('all')">All Designs</button>
+        <button class="filter-btn" onclick="filterSelection('rings')">Rings</button>
+        <button class="filter-btn" onclick="filterSelection('chains')">Chains</button>
+        <button class="filter-btn" onclick="filterSelection('bangles')">Bangles</button>
+    </div>
 
-    <section class="features">
-        <div class="feature-card">
-            <h3>Unique Thoughts</h3>
-            <p>ప్రతి నగ వెనుక ఒక ప్రత్యేకమైన ఆలోచన ఉంటుంది.</p>
+    <div class="gallery">
+        <div class="column rings">
+            <div class="content">
+                <img src="ring1.jpg" alt="Ring" onclick="openModal(this.src)">
+                <p>Gold Ring Model</p>
+            </div>
         </div>
-        <div class="feature-card">
-            <h3>Stylish Designs</h3>
-            <p>ట్రెండ్‌కి తగ్గట్టుగా మోడరన్ మరియు క్లాసిక్ స్టైల్స్.</p>
+        <div class="column rings">
+            <div class="content">
+                <img src="ring2.jpg" alt="Ring" onclick="openModal(this.src)">
+                <p>Premium Ring</p>
+            </div>
         </div>
-        <div class="feature-card">
-            <h3>Expert Craftsmanship</h3>
-            <p>అనుభవజ్ఞులైన కళాకారులచే నైపుణ్యంతో తయారీ.</p>
+
+        <div class="column chains">
+            <div class="content">
+                <img src="chain1.jpg" alt="Chain" onclick="openModal(this.src)">
+                <p>New Model Chain</p>
+            </div>
         </div>
-    </section>
+
+        <div class="column bangles">
+            <div class="content">
+                <img src="bangle1.jpg" alt="Bangle" onclick="openModal(this.src)">
+                <p>Traditional Bangle</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal" onclick="this.style.display='none'">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        // Filter logic
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("column");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+                if (x[i].className.indexOf(c) > -1) x[i].style.display = "block";
+            }
+        }
+
+        // Add active class to the current button
+        var btnContainer = document.querySelector(".filter-container");
+        var btns = btnContainer.getElementsByClassName("filter-btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function(){
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+
+        // Modal Logic
+        function openModal(src) {
+            document.getElementById("myModal").style.display = "block";
+            document.getElementById("img01").src = src;
+        }
+    </script>
 
 </body>
 </html>
